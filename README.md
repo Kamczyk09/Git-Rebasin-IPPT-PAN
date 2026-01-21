@@ -1,6 +1,6 @@
 # Git Rebasin IPPT PAN
 
-Research utilities for training, evaluating, explaining, and experimenting with neural network models on CIFAR-10 and medical images. This repository collects model definitions, explanation methods (Grad-CAM), weight interpolation and matching tools, and training/evaluation utilities used during experiments. The dataset contains biomedical images of lungs of patients with and without pneumonia.
+The purpose of this repository is to explore concept of Git-Rebasin methods and how it performs on different model architectures. It contains research utilities for training, evaluating, explaining, and experimenting with neural network models on CIFAR-10 and medical images. This repository collects model definitions, explanation methods (Grad-CAM), weight interpolation and matching tools, and training/evaluation utilities used during experiments. The dataset contains biomedical images of lungs of patients with and without pneumonia.
 
 ## Quick summary
 - Models: `models/CNN.py`, `models/MLP.py`, `models/ResNet18.py`
