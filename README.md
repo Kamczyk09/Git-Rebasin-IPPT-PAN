@@ -1,16 +1,17 @@
 # Git Rebasin IPPT PAN
 
-Research utilities for training, evaluating, explaining, and experimenting with neural network models on CIFAR-10 and medical images. This repository collects model definitions, explanation methods (Grad-CAM, RISE), weight interpolation and matching tools, and training/evaluation utilities used during experiments.
+Research utilities for training, evaluating, explaining, and experimenting with neural network models on CIFAR-10 and medical images. This repository collects model definitions, explanation methods (Grad-CAM), weight interpolation and matching tools, and training/evaluation utilities used during experiments. The dataset contains biomedical images of lungs of patients with and without pneumonia.
 
 ## Quick summary
 - Models: `models/CNN.py`, `models/MLP.py`, `models/ResNet18.py`
-- Explanations: `apply_grad_cam.py` (Grad-CAM), `rise/apply_rise.py` (RISE), and a local `pytorch_grad_cam/` implementation
+- Explanations: `apply_grad_cam.py` (Grad-CAM), and a local `pytorch_grad_cam/` implementation
 - Weight operations: `linear_interpolation.py`, `weight_matching_mod.py`
 - Training / eval helper: `main.py`
 - Example checkpoints: `models_checkpoints/`
 - Datasets: `data/` (CIFAR-10 raw batches and `medical_images/`)
 
 This README explains what is in the repository and how to run the main scripts.
+
 
 ---
 
@@ -34,21 +35,20 @@ pip install -r requirements.txt
 
 Notes:
 - If you need GPU support, install a PyTorch build that matches your CUDA version (see https://pytorch.org).
-- Some scripts may use additional utilities included in `utils_module/` or `rise/`.
+- Some scripts may use additional utilities included in `utils_module/`.
 
 ---
 
 ## Project layout (key files)
 - `main.py` — high-level script for training and evaluation (check CLI flags with `-h`).
 - `apply_grad_cam.py` — wrapper to apply Grad-CAM explanations to images/inputs.
-- `rise/apply_rise.py` — wrapper to apply the RISE explanation method.
 - `linear_interpolation.py` — create interpolated weight checkpoints between two saved models.
-- `weight_matching_mod.py` — utilities to match/merge model weights.
+- `weight_matching_mod.py` — utilities to match/merge model weights and create accuracy interpolations.
 - `models/` — model definitions used by scripts.
 - `models_checkpoints/` — example pretrained and raw weights shipped with the repo.
 - `data/` — datasets (CIFAR-10 batches, `medical_images/` with `train/` and `test/`).
 - `pytorch_grad_cam/` — implementation of several CAM algorithms used by `apply_grad_cam.py`.
-- `utils_module/`, `rise/`, `metrics/`, `feature_factorization/` — supporting utilities and research code.
+- `utils_module/`, `metrics/`, `feature_factorization/` — supporting utilities and research code.
 
 ---
 
@@ -60,7 +60,6 @@ Run `-h` on each script to see supported flags; the repository uses simple CLI p
 ```bash
 python main.py -h
 python apply_grad_cam.py -h
-python rise/apply_rise.py -h
 python linear_interpolation.py -h
 python weight_matching_mod.py -h
 ```
@@ -81,12 +80,6 @@ python main.py --mode eval --checkpoint models_checkpoints/resnet18_pretrained.p
 ```bash
 # Example (adjust flags to your local script)
 python apply_grad_cam.py --checkpoint models_checkpoints/resnet18_pretrained.pth --image data/medical_images/test/your_image.png --output out_gradcam.png
-```
-
-4) Apply RISE
-
-```bash
-python rise/apply_rise.py --checkpoint models_checkpoints/cnn_pretrained.pth --image data/medical_images/test/your_image.png --output out_rise.png
 ```
 
 5) Linear interpolation between two weight files
@@ -138,9 +131,9 @@ Inside scripts, device selection may be controlled by `torch.cuda.is_available()
 ## Tips & next steps
 - Add a `requirements.txt` with pinned versions for reproducibility.
 - Add small example scripts that show end-to-end usage (train → eval → explain) with exact flags used in experiments.
-- Consider adding notebooks that render example Grad-CAM / RISE outputs.
+- Consider adding notebooks that render example Grad-CAM outputs.
 
 ---
 
-If you want, I can now: (A) inspect `main.py`, `apply_grad_cam.py`, and `rise/apply_rise.py` and update the README examples to show exact CLI flags used by each script, or (B) add a `requirements.txt` generated from the environment. Which would you prefer?
+If you want, I can now: (A) inspect `main.py` and `apply_grad_cam.py` and update the README examples to show exact CLI flags used by each script, or (B) add a `requirements.txt` generated from the environment. Which would you prefer?
 

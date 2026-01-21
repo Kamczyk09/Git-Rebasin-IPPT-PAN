@@ -13,11 +13,11 @@ from torch.utils.data import DataLoader
 model_type = 'mlp'
 
 if model_type == 'cnn':
-    from matching_mod.models import CNN as model_func
+    from models import CNN as model_func
 elif model_type == 'resnet18':
-    from matching_mod.models import MLP as model_func
+    from models import MLP as model_func
 elif model_type == 'mlp':
-    from matching_mod.models import ResNet18 as model_func
+    from models import ResNet18 as model_func
 else:
     raise("Wrong model_type")
 
