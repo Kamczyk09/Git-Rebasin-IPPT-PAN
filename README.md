@@ -134,6 +134,3 @@ Inside scripts, device selection may be controlled by `torch.cuda.is_available()
 - Consider adding notebooks that render example Grad-CAM outputs.
 
 ---
-
-If you want, I can now: (A) inspect `main.py` and `apply_grad_cam.py` and update the README examples to show exact CLI flags used by each script, or (B) add a `requirements.txt` generated from the environment. Which would you prefer?
-
